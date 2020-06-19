@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require( "fs" )
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'))
 
@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // GET /api/notes - Should read the db.json file and return all saved notes as JSON.
-const notesList = readNotes();
+var notesList = readNotes();
 
 function readNotes(){
     const notes = JSON.parse( fs.readFileSync( './db/db.json', 'utf8' ) )
@@ -47,17 +47,17 @@ app.post('/api/notes', function (req, res){
 app.delete('/api/notes/:id', function (req, res){
     const noteId = req.params.id;
 
-    noteList = noteList.filter( note=>note.id != noteId)
+    notesList = notesList.filter( note=>note.id != noteId)
     //filter = functional programming...
     //input array ---> do somthing with it ----> output array....
-    //ex. noteList = noteList.filter( function( note ){ return note.id !== "noteId" ? true : false }) ====> same thing
+    //ex. notesList = notesList.filter( function( note ){ return note.id !== "noteId" ? true : false }) ====> same thing
 
     saveNotes();
     console.log('[DELETE] ')
     res.send( { id: noteId, message: "Delete successfully", status: true })
 })
 
-//Listener-------------------------------------
+//LISTENER-------------------------------------
 app.listen(PORT, function(){
     console.log(`App listening on PORT`+ PORT);
 });
