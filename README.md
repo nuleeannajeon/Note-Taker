@@ -1,4 +1,8 @@
-# Note-Taker
+# Note Taker
+
+### Screenshots
+![note-taker screenshot](./images/note-taker-home.png)
+![note-taker screenshot](./images/note-taker-notes.png)
 
 # Unit 11 Express Homework: Note Taker
 
